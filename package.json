@@ -18,6 +18,8 @@
     "body-parser": "^1.18.3",
     "cassandra-driver": "^3.5.0",
     "dotenv": "^6.1.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "helmet": "^3.14.0",
+    "limits": "^1.0.0"
   }
 }

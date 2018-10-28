@@ -4,7 +4,10 @@ const {
 const express = require('express');
 const bodyParser = require('body-parser');
 const Promise = require('bluebird');
+const helmet = require('helmet');
+const nodeLimits = require('limits');
 
+const reqDuration = 2629746000; // 1-month hsts
 
 // Allow bluebird promise cancellation
 Promise.config({
@@ -17,16 +20,64 @@ Promise.config({
 function startAsync() {
   // Start by initializing cassandra
   return initCassandraAsync()
+    // Create any tables here
+    // @todo
     // Start the express server to process requests
     .then(() => {
       const app = express();
-      app.use(bodyParser.json());
+      app.use(bodyParser.json({
+        limit: '1mb' // limit string length
+      }));
       app.use(bodyParser.urlencoded({
         extended: true
       }));
-      // security by obscurity
+
+      // security by obscurity (helmet does this also)
       app.disable('x-powered-by');
-      // @todo routes go here
+
+      // helmet
+      app.use(helmet());
+
+      // hsts
+      app.use(helmet.hsts({
+        maxAge: reqDuration
+      }));
+
+      // framebuster
+      app.use(helmet.frameguard({
+        action: 'deny'
+      }));
+
+      // content security policy
+      app.use(helmet.contentSecurityPolicy({
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'"],
+          childSrc: ["'none'"],
+          objectSrc: ["'none'"],
+          formAction: ["'none'"],
+        }
+      }));
+
+      // x-xss-protection (disabled for ie8/ie9 which opens vulnerability)
+      app.use(helmet.xssFilter());
+
+      // x-content-type-options
+      app.use(helmet.noSniff());
+
+      // limit some things
+      app.use(nodeLimits({
+        file_uploads: false,
+        post_max_size: 1000000,   // 1mb max upload
+        inc_req_timeout: 1000*60  // 60 seconds 
+      }))
+
+      const port = 3003;
+
+      app.get('/', (req, res) => res.send('Hello World!'))
+
+      app.listen(port, () => console.log(`Express listening on port ${port}!`))
+
       return app;
     })
     .catch(err => {
