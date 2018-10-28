@@ -63,6 +63,6 @@ exports.initCassandraAsync = () => {
     .tap(client => {
       // Save client instance for reuse everywhere and log
       clientInstance = client;
-      console.log('info', 'Cassandra initialized')
+      console.log('info', 'Cassandra ready')
     });
 };

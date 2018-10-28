@@ -9,6 +9,8 @@ const nodeLimits = require('limits');
 
 const reqDuration = 2629746000; // 1-month hsts
 
+const auth = require('./controllers/auth.js');
+
 // Allow bluebird promise cancellation
 Promise.config({
   cancellation: true
@@ -21,7 +23,9 @@ function startAsync() {
   // Start by initializing cassandra
   return initCassandraAsync()
     // Create any tables here
-    // @todo
+    .then(client => {
+      return auth.createTable(client);
+    })
     // Start the express server to process requests
     .then(() => {
       const app = express();
@@ -76,7 +80,7 @@ function startAsync() {
 
       app.get('/', (req, res) => res.send('Hello World!'))
 
-      app.listen(port, () => console.log(`Express listening on port ${port}!`))
+      app.listen(port, () => console.log(`info Express listening on port ${port}!`))
 
       return app;
     })
