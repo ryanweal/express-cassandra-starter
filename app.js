@@ -1,3 +1,5 @@
+'use strict';
+
 const {
   initCassandraAsync
 } = require('./src/cassandra.js');
@@ -10,6 +12,9 @@ const nodeLimits = require('limits');
 const reqDuration = 2629746000; // 1-month hsts
 
 const auth = require('./controllers/auth.js');
+
+console.log('Node', process.version);
+console.log('info Remember to only run even-numbered (LTS) versions of node in production.');
 
 // Allow bluebird promise cancellation
 Promise.config({
