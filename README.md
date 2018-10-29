@@ -1,12 +1,18 @@
 # express-cassandra-starter
 
+0. Clone this repo
+
+Run `npm install` to fetch the packages needed to run this package. Install Node.js if you do not have npm.
+
 1. Populate your environment variables and/or create a variables.env file in this folder:
 
-    CASSANDRA_USER='username'
-    CASSANDRA_PASS='password'
-    CASSANDRA_CONTACT_POINTS="127.0.0.3,127.0.0.4,127.0.0.5"
-    CASSANDRA_KEYSPACE='mykeyspace'
-    SECRET='randomwords' # changing this will expire all issued tokens
+```
+CASSANDRA_USER='username'
+CASSANDRA_PASS='password'
+CASSANDRA_CONTACT_POINTS="127.0.0.3,127.0.0.4,127.0.0.5"
+CASSANDRA_KEYSPACE='mykeyspace'
+SECRET='randomwords' # changing this will expire all issued tokens
+```
 
 2. Remember to create a keyspace, `mykeyspace`, to start:
 
@@ -17,9 +23,12 @@
 
 ## Colophon
 
-This package is based on:
+This package makes use of:
 
  - express.js
+ - helmet
+ - limits
+ - dotenv
  - datastax-driver
  - node.js
 
