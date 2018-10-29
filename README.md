@@ -6,6 +6,7 @@
     CASSANDRA_PASS='password'
     CASSANDRA_CONTACT_POINTS="127.0.0.3,127.0.0.4,127.0.0.5"
     CASSANDRA_KEYSPACE='mykeyspace'
+    SECRET='randomwords' # changing this will expire all issued tokens
 
 2. Remember to create a keyspace, `mykeyspace`, to start:
 
