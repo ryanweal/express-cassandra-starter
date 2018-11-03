@@ -32,16 +32,24 @@ exports.createTable = (init_client) => {
 
 exports.register = async (req, res) => {
   // password
-  if (!req.body.password) {
+  if (!req.body.password || req.body.password.length === 0) {
     res.status(403).send('Please submit a password!');
+    return;
+  }
+  if (!validator.isLength(req.body.password, { min: 8, max: 128 })) {
+    res.status(403).send('Please submit a password that is between 8 and 128 characters in length.');
     return;
   }
   // converted to safe value, hashed, and salted
   const pass = await bcrypt.hashSync(String(req.body.password), 8);
 
   // email
-  if (!req.body.email) {
+  if (!req.body.email || req.body.email.length === 0) {
     res.status(403).send('Please submit an email address!');
+    return;
+  }
+  if (!validator.isLength(req.body.email, { min: 8, max: 128 })) {
+    res.status(403).send('That did not look like an email address.');
     return;
   }
   if (!validator.isEmail(req.body.email)) {
@@ -80,16 +88,24 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   // password
-  if (!req.body.password) {
-    res.status(403).send('Please submit a password!');
+  if (!req.body.password || req.body.password.length === 0) {
+    res.status(403).send({error: 'Please submit a password!'});
+    return;
+  }
+  if (!validator.isLength(req.body.password, { min: 8, max: 128 })) {
+    res.status(403).send('Please submit a password that is between 8 and 128 characters in length.');
     return;
   }
   // converted to safe value, hashed, and salted
   const pass = String(req.body.password);
 
   // email
-  if (!req.body.email) {
+  if (!req.body.email || req.body.email.length === 0) {
     res.status(403).send('Please submit an email address!');
+    return;
+  }
+  if (!validator.isLength(req.body.email, { min: 8, max: 128 })) {
+    res.status(403).send('That did not look like an email address.');
     return;
   }
   if (!validator.isEmail(req.body.email)) {
