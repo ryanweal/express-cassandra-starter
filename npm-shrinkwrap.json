@@ -900,6 +900,11 @@
       "resolved": "https://registry.npmjs.org/nocache/-/nocache-2.0.0.tgz",
       "integrity": "sha1-ICtIAhoMTL3i34DeFaF0Q8i0OYA="
     },
+    "node-esapi": {
+      "version": "0.0.1",
+      "resolved": "https://registry.npmjs.org/node-esapi/-/node-esapi-0.0.1.tgz",
+      "integrity": "sha1-b0xFahTrvRNaDw0XZsMLKr8HGYw="
+    },
     "on-finished": {
       "version": "2.3.0",
       "resolved": "https://registry.npmjs.org/on-finished/-/on-finished-2.3.0.tgz",
