@@ -1,12 +1,12 @@
 {
   "name": "express-cassandra-starter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Express-Cassandra node.js webservice starter package",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha tests/auth.js || exit 0",
+    "test": "node ./node_modules/mocha/bin/mocha tests/tests.js || exit 0",
     "nsp": "node ./node_modules/nsp/bin/nsp check",
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "pre-commit": [
     "nsp"
