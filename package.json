@@ -7,6 +7,10 @@
     "test": "node ./node_modules/mocha/bin/mocha tests/auth.js || exit 0",
     "start": "node app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryanweal/express-cassandra-starter.git"
+  },
   "keywords": [
     "webservice",
     "cassandra"
