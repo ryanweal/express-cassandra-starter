@@ -87,6 +87,7 @@ function startAsync() {
 
       app.post('/register', (req, res) => auth.register(req,res));
       app.post('/login', (req, res) => auth.login(req,res));
+      app.post('/testcleanup', (req, res) => auth.testcleanup(req,res));
 
       app.listen(port, () => console.log(`info Express listening on port ${port}!`))
 
