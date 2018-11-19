@@ -1,6 +1,6 @@
 {
   "name": "express-cassandra-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Express-Cassandra node.js webservice starter package",
   "main": "app.js",
   "scripts": {
